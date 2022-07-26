@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API homework</title>
+</head>
+
+<body>
+    <div id="containerID">
+        
+        <button type="button" onclick="loadPost()">Post </button>
+        <button type="button" onclick="addPost()">Add Post</button>
+        <button type="button" onclick="editPost()">Edit Post</button>
+        <button type="button" onclick="deletePost()">Delete Post</button>
+        <p id="postID"></p>
+    </div>
+    <script>
+        function loadPost() {
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
+                if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
+                    document.getElementById("postID").innerHTML = this.responseText;
+                }
+            };
+            xhttp.open("GET", "https://jsonplaceholder.typicode.com/comments/", true);
+            xhttp.send();
+        }
+
+        function addPost() {
+            var post = {
+                "postId": 2,
+                "id": 6,
+                "name": "Busecan Rares",
+                "email": "buseca.rares@yahoo.com",
+                "body": "doloribus at sed quis culpa deserunt consectetur qui praesentium\naccusamus fugiat dicta\nvoluptatem rerum ut voluptate autem\nvoluptatem repellendus aspernatur dolorem in"
+            }
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
+                if (this.readyState == XMLHttpRequest.DONE && this.status == 201) {
+                    document.getElementById("postID").innerText = "Done - this post is added!";
+                }
+            };
+            xhttp.open("POST", "https://jsonplaceholder.typicode.com/comments/", true);
+            xhttp.send(JSON.stringify(post));
+        }
+        function editPost() {
+            var post = {
+                "postId": 2,
+                "id": 6,
+                "name": "Busecan Rares",
+                "email": "buseca.rares@yahoo.com",
+                "body": "doloribus at sed quis culpa deserunt consectetur qui praesentium\naccusamus fugiat dicta\nvoluptatem rerum ut voluptate autem\nvoluptatem repellendus aspernatur dolorem in"
+            }
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
+                if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
+                    document.getElementById("postID").innerText = "Done - this post is updated!";
+                }
+            };
+            xhttp.open("PUT", "https://jsonplaceholder.typicode.com/comments/1", true);
+            xhttp.send(JSON.stringify(post));
+        }
+
+        function deletePost() {
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
+                if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
+                    document.getElementById("postID").innerHTML = "Done - the post si deleted";
+                }
+            };
+            xhttp.open("DELETE", "https://jsonplaceholder.typicode.com/comments/9", true);
+            xhttp.send();
+        }
+    </script>
+</body>
+
+</html>
